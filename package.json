@@ -1,0 +1,30 @@
+{
+  "name": "Backbone.PaginatorCollectionLink",
+  "version": "0.0.1",
+  "description": "Binds Backbone.Paginator to a source (virtual) collection.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WRidder/Backbone.PaginatorCollectionLink.git"
+  },
+  "keywords": [
+    "Backbone.Paginator",
+    "Collection",
+    "VirtualCollection",
+    "Backbone"
+  ],
+  "author": "Wilbert van de Ridder",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WRidder/Backbone.PaginatorCollectionLink/issues"
+  },
+  "homepage": "https://github.com/WRidder/Backbone.PaginatorCollectionLink",
+  "dependencies": {
+    "backbone": "^1.1.2",
+    "backbone-virtual-collection": "^0.6.1",
+    "backbone.paginator": "^2.0.2"
+  }
+}
