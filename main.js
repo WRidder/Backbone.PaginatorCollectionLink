@@ -7,19 +7,30 @@ function generateTitle() {
 	return subjects[Math.round(Math.random()*(subjects.length-1))]+' '+verbs[Math.round(Math.random()*(verbs.length-1))]+' '+objects[Math.round(Math.random()*(objects.length-1))]+endings[Math.round(Math.random()*(endings.length-1))];
 }
 
-// Define a collection
-var baseCollection = new Backbone.Collection([], {
-	comparator: "title"
-});
-for (var i = 0; i < 15; i++) {
-	baseCollection.add({
+var idCount = 1;
+function generateModel(showVirtual) {
+	return {
+		id: idCount++,
 		title: generateTitle(),
-		showVirtual: Math.random() > 0.5
-	});
+		showVirtual: (typeof showVirtual !== 'undefined') ? showVirtual : (Math.random() > 0.5)
+	};
 }
 
+function generateModels(amount) {
+	var modelArray = [];
+	for (var i = 0; i < amount; i++) {
+		modelArray.push(generateModel());
+	}
+	return modelArray;
+}
+
+// Define a collection
+var baseCollection = new Backbone.Collection(generateModels(15), {
+	comparator: "id"
+});
+
 var virtualCollection = new VirtualCollection(baseCollection, {
-	comparator: "title",
+	comparator: "id",
 	filter: {
 		showVirtual: true
 	}
@@ -53,16 +64,18 @@ var movieItemView = Marionette.ItemView.extend({
 var MovieCompViewFull = Marionette.CompositeView.extend({
 	template: "#movie-list",
 	ui: {
-		btnAdd: '.btnadditem'
+		btnAdd: '.btnadditem',
+		btnReset: '.btnreset'
 	},
 	events: {
-		'click @ui.btnAdd': 'addItem'
+		'click @ui.btnAdd': 'addItem',
+		'click @ui.btnReset': 'resetCol'
 	},
 	addItem: function() {
-		this.collection.add({
-			title: generateTitle(),
-			showVirtual: Math.random() > 0.5
-		});
+		this.collection.add(generateModel());
+	},
+	resetCol: function() {
+		this.collection.reset(generateModels(15));
 	},
 	templateHelpers: function () {
 		return {
@@ -80,10 +93,7 @@ var MovieCompViewVirtual = MovieCompViewFull.extend({
 		}
 	},
 	addItem: function() {
-		this.collection.add({
-			title: generateTitle(),
-			showVirtual: true
-		});
+		this.collection.add(generateModel(true));
 	}
 });
 
@@ -137,13 +147,29 @@ var PageableTitles = Backbone.PageableCollection.extend({
 	mode: "client"
 });
 
-var pageableTitles = new PageableTitles(virtualCollection.models,{
-	state: {
-		firstPage: 0,
-		currentPage: 0,
-		pageSize: 4
-	}
-});
+var useLink = true;
+var pageableTitles;
+if (useLink) {
+	// Create pageable collection
+	pageableTitles = Backbone.PaginatorCollectionLink(virtualCollection,{
+		mode: "client",
+		state: {
+			firstPage: 0,
+			currentPage: 0,
+			pageSize: 4
+		}
+	});
+}
+else {
+	pageableTitles = new PageableTitles(virtualCollection.models,{
+		mode: "client",
+		state: {
+			firstPage: 0,
+			currentPage: 0,
+			pageSize: 4
+		}
+	});
+}
 
 // Set up a grid to use the pageable collection
 var columns = [{
@@ -188,3 +214,19 @@ $col3.append(paginator.render().el);
 
 // Add some space to the filter and move it to the right
 $(filter.el).css({float: "right", margin: "20px"});
+
+// Add 'add item' button
+$('<button/>', {
+	class: "btn btn-primary",
+	text: "Add item"
+}).appendTo($col3).click(function() {
+	pageableTitles.add(generateModel());
+});
+
+// Add 'reset' button
+$('<button/>', {
+	class: "btn btn-primary",
+	text: "Reset"
+}).appendTo($col3).click(function() {
+	pageableTitles.reset(generateModels(10));
+});
