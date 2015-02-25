@@ -16,7 +16,7 @@ module.exports = function(release) {
     entry: './src/Backbone.PaginatorCollectionLink.js',
 
     output: {
-      filename: 'Backbone.PaginatorCollectionLink.js',
+      filename: (release) ? 'lib/Backbone.PaginatorCollectionLink.min.js' : 'lib/Backbone.PaginatorCollectionLink.js',
 
       // Library settings
       library: "Backbone.PaginatorCollectionLink",

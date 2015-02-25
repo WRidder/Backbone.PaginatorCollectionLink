@@ -24,9 +24,13 @@
     <link rel="stylesheet" href="vendor/backgrid-filter.min.css">
 
     <link rel="stylesheet" href="style.css">
+
+    <!-- Insert library -->
+    <script type="text/javascript" src="../lib/Backbone.PaginatorCollectionLink.js"></script>
 </head>
 <body>
-<h1>Backbone.PaginatorCollectionLink example</h1>
+<h1>Pageable backgrid + out of sync collections example</h1>
+<span>Uses collections with randomly generated titles. May contain duplicates.</span>
 <div class="row">
     <div id="col1" class="col-sm-4 column">
     </div>
@@ -44,6 +48,7 @@
         <div class="panel-body"></div>
     </div >
     <button type="button" class="btn btn-primary btnadditem">Add item</button>
+    <button type="button" class="btn btn-primary btnreset">Reset collection</button>
 </script>
 
 <script type="text/template" id="movie-list-item">

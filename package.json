@@ -2,7 +2,7 @@
   "name": "Backbone.PaginatorCollectionLink",
   "version": "0.0.1",
   "description": "Binds Backbone.Paginator to a source (virtual) collection.",
-  "main": "src/Backbone.PaginatorCollectionLink.js",
+  "main": "lib/Backbone.PaginatorCollectionLink.js",
   "scripts": {
     "test": "grunt test"
   },

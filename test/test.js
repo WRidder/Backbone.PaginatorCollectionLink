@@ -8,8 +8,4 @@ describe("A PaginatorCollectionLink using a plain Backbone collection", function
 	it("has a source collection of length 3", function () {
 		expect(col.length).toBe(3);
 	});
-
-	it("does not have a source collection of length 4", function () {
-		expect(col.length).not.toBe(3);
-	});
 });
