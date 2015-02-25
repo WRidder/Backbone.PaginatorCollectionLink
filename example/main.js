@@ -147,7 +147,7 @@ var PageableTitles = Backbone.PageableCollection.extend({
 	mode: "client"
 });
 
-var useLink = true;
+var useLink = false;
 var pageableTitles;
 if (useLink) {
 	// Create pageable collection
