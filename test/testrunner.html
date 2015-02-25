@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Backbone.PaginatorCollectionLink Test suite</title>
+
+    <!-- Dependencies -->
+    <script type="text/javascript" src="../node_modules/underscore/underscore-min.js"></script>
+    <script type="text/javascript" src="../node_modules/backbone/backbone-min.js"></script>
+    <script type="text/javascript" src="../node_modules/backbone-virtual-collection/dist/backbone.virtual-collection.min.js"></script>
+    <script type="text/javascript" src="../node_modules/backbone.paginator/lib/backbone.paginator.min.js"></script>
+
+    <!-- Jasmine files -->
+    <link rel="stylesheet" href="../node_modules/jasmine-reporters/lib/jasmine-2.0.0/jasmine.css" type="text/css" />
+    <script type="text/javascript" src="../node_modules/jasmine-reporters/lib/jasmine-2.0.0/jasmine.js"></script>
+    <script type="text/javascript" src="../node_modules/jasmine-reporters/lib/jasmine-2.0.0/jasmine-html.js"></script>
+    <script type="text/javascript" src="../node_modules/jasmine-reporters/src/junit_reporter.js"></script>
+    <script type="text/javascript" src="../node_modules/jasmine-reporters/lib/jasmine-2.0.0/boot.js"></script>
+    <script>
+        jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({
+            savePath: '..',
+            consolidateAll: false
+        }));
+    </script>
+
+    <!-- Include spec file -->
+    <script type="text/javascript" src="test.js"></script>
+</head>
+<body>
+</body>
+</html>
